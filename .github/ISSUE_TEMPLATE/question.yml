@@ -1,0 +1,60 @@
+name: ❓ Question / Support
+description: Ask a question or request help
+title: "[Question]: "
+labels: ["question", "needs-triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before asking a question, please check:
+        - 📖 [Documentation and Wiki](https://github.com/OWNER/REPO/wiki)
+        - 💬 [Existing Discussions](https://github.com/OWNER/REPO/discussions)
+        - 🔍 [Existing Issues](https://github.com/OWNER/REPO/issues)
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What would you like to know?
+      placeholder: Ask your question here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide context to help us understand your question
+      placeholder: |
+        - What are you trying to achieve?
+        - What have you already tried?
+        - What documentation have you checked?
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Sample (if applicable)
+      description: Provide a minimal code sample that demonstrates your question
+      render: javascript
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (if applicable)
+      placeholder: |
+        - OS: [e.g. Windows 11]
+        - Version: [e.g. 1.2.3]
+        - Configuration: [any relevant settings]
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have checked the documentation and existing issues
+          required: true
+        - label: This question is specific to this project (not a general programming question)
+          required: true
