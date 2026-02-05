@@ -1,0 +1,93 @@
+{
+  "name": "enterprise-strict-ruleset",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": { "include": ["main", "release/*", "hotfix/*"], "exclude": [] }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 3,
+        "require_code_owner_review": true,
+        "dismiss_stale_reviews_on_push": true,
+        "require_last_push_approval": true,
+        "required_review_thread_resolution": true
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "required_status_checks": [
+          "security-scan",
+          "sast",
+          "dependency-check",
+          "build",
+          "test",
+          "integration-test",
+          "lint"
+        ],
+        "strict_required_status_checks_policy": true
+      }
+    },
+    {
+      "type": "required_signatures"
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "creation"
+    },
+    {
+      "type": "deletion"
+    },
+    {
+      "type": "commit_message_pattern",
+      "parameters": {
+        "name": "Strict Conventional Commits",
+        "pattern": "^(feat|fix|docs|style|refactor|perf|test|build|ci|chore)(\\([a-z0-9-]+\\))?: [A-Z].{10,}",
+        "operator": "matches",
+        "negate": false
+      }
+    },
+    {
+      "type": "commit_author_email_pattern",
+      "parameters": {
+        "name": "Corporate email required",
+        "pattern": "^[a-zA-Z0-9._%+-]+@(company\\.com|enterprise\\.org)$",
+        "operator": "matches",
+        "negate": false
+      }
+    },
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "restricted_file_paths": [
+          "**/*.env",
+          "**/.env.*",
+          "**/secrets/**",
+          "**/credentials/**",
+          "**/*.key",
+          "**/*.pem",
+          "**/*.p12",
+          "**/*.pfx"
+        ]
+      }
+    },
+    {
+      "type": "max_file_size",
+      "parameters": {
+        "max_file_size": 5
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-02-05",
+    "updated": "2026-02-05",
+    "description": "Enterprise-grade protection with 3 required reviews, code owner approval, comprehensive status checks, signed commits, and strict security controls",
+    "tags": ["enterprise", "strict", "security", "compliance", "signed-commits"]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "lambda-backend-protection",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": { "include": ["main", "dev"], "exclude": [] }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 2,
+        "require_code_owner_review": true,
+        "dismiss_stale_reviews_on_push": true,
+        "required_review_thread_resolution": true
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "required_status_checks": [
+          "build",
+          "lint",
+          "test"
+        ],
+        "strict_required_status_checks_policy": true
+      }
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "creation"
+    },
+    {
+      "type": "update",
+      "parameters": {
+        "allowed_actors": []
+      }
+    },
+    {
+      "type": "commit_message_pattern",
+      "parameters": {
+        "name": "Conventional commits",
+        "pattern": "^(feat|fix|docs|style|refactor|perf|test|ci)(\\(.+\\))?: .+",
+        "operator": "matches",
+        "negate": false
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-02-05",
+    "updated": "2026-02-05",
+    "description": "Strict protection rules for AWS Lambda backend services with required code reviews, status checks, and conventional commits",
+    "tags": ["backend", "lambda", "aws", "serverless", "strict"]
+  }
+}

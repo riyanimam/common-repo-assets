@@ -1,0 +1,17 @@
+# Common settings
+* text=auto eol=lf
+
+# JSON files
+*.json text eol=lf
+
+# Markdown files
+*.md text eol=lf
+
+# Documentation
+README.md text eol=lf
+LICENSE text eol=lf
+
+# Git configuration files
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.editorconfig text eol=lf
