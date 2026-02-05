@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/riyanimam/common-repo-assets/schema/ruleset-schema.json",
+  "title": "GitHub Repository Ruleset Configuration",
+  "description": "Schema for GitHub branch protection and repository rulesets",
+  "type": "object",
+  "required": ["name", "target", "enforcement", "rules"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Unique name for this ruleset"
+    },
+    "target": {
+      "type": "string",
+      "enum": ["branch", "tag"],
+      "description": "What this ruleset applies to"
+    },
+    "enforcement": {
+      "type": "string",
+      "enum": ["active", "disabled", "evaluate"],
+      "description": "Enforcement level for this ruleset"
+    },
+    "conditions": {
+      "type": "object",
+      "description": "Conditions when this ruleset applies",
+      "properties": {
+        "ref_name": {
+          "type": "object",
+          "properties": {
+            "include": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Branch/tag patterns to include"
+            },
+            "exclude": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Branch/tag patterns to exclude"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "description": "List of protection rules to apply",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "creation",
+              "update",
+              "deletion",
+              "required_linear_history",
+              "required_deployments",
+              "required_signatures",
+              "pull_request",
+              "required_status_checks",
+              "non_fast_forward",
+              "commit_message_pattern",
+              "commit_author_email_pattern",
+              "committer_email_pattern",
+              "branch_name_pattern",
+              "tag_name_pattern",
+              "file_path_restriction",
+              "max_file_path_length",
+              "file_extension_restriction",
+              "max_file_size",
+              "workflows"
+            ],
+            "description": "Type of rule to apply"
+          },
+          "parameters": {
+            "type": "object",
+            "description": "Parameters specific to the rule type"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about this ruleset",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Version of this ruleset configuration"
+        },
+        "created": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this ruleset was created"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date",
+          "description": "Date this ruleset was last updated"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author of this ruleset"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of this ruleset's purpose"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tags for categorizing this ruleset"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "terraform-module-protection",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": { "include": ["main", "release/*"], "exclude": [] }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 2,
+        "require_code_owner_review": true
+      }
+    },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "required_status_checks": [
+          "terraform fmt",
+          "terraform validate",
+          "plan"
+        ],
+        "strict_required_status_checks_policy": true
+      }
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "commit_message_pattern",
+      "parameters": {
+        "name": "Conventional commits",
+        "pattern": "^(chore|feat|fix|docs|refactor|ci)(\\(.+\\))?: .+",
+        "operator": "matches",
+        "negate": false
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-02-05",
+    "updated": "2026-02-05",
+    "description": "Infrastructure-as-code protection rules for Terraform modules with required formatting, validation, and planning checks",
+    "tags": ["terraform", "infrastructure", "iac", "strict"]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "signal-bot-playground-main",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": ["main"],
+      "exclude": []
+    }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": false,
+        "require_code_owner_review": false,
+        "require_last_push_approval": false
+      }
+    },
+    {
+      "type": "non_fast_forward"
+    },
+    {
+      "type": "commit_message_pattern",
+      "parameters": {
+        "name": "Basic Commit Hygiene",
+        "pattern": "^[A-Za-z].{10,}$",
+        "negate": false
+      }
+    },
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "restricted_file_paths": [
+          ".env",
+          "**/*.env",
+          "**/secrets/**"
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-02-05",
+    "updated": "2026-02-05",
+    "description": "Lightweight protection rules for Signal bot with basic commit message validation and comprehensive secret file restrictions",
+    "tags": ["bot", "signal", "secrets-protection", "lightweight"]
+  }
+}
